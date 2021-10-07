@@ -3,28 +3,28 @@ package com.BridgeLabz.WeekOne;
  import org.openqa.selenium.By;
  import org.openqa.selenium.WebElement;
  import org.openqa.selenium.firefox.FirefoxDriver;
+ import org.openqa.selenium.firefox.FirefoxOptions;
  import org.openqa.selenium.firefox.FirefoxProfile;
  import org.openqa.selenium.remote.DesiredCapabilities;
 
-public class DownloadTest {
+public class DownloadTestFireFoxOnly {
     public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.gecko.driver", "C:\\AutomationFiles\\Drivers\\geckodriver.exe\\");
 
-        FirefoxProfile ffProfile = new FirefoxProfile();
+        FirefoxOptions ffOptions = new FirefoxOptions();
 
-        ffProfile.setPreference("browser.download.dir", "C:\\Random");
-        ffProfile.setPreference("browser.download.folderList", 2);
+        ffOptions.addPreference("browser.download.dir", "C:\\Random");
+        ffOptions.addPreference("browser.download.folderList", 2);
 
-        ffProfile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/zip;");
+        ffOptions.addPreference("browser.helperApps.neverAsk.saveToDisk", "application/zip;");
 
-        ffProfile.setPreference("browser.download.manager.showWhenStarting", false);
-        ffProfile.setPreference("pdfjs.disabled", true);
+        ffOptions.addPreference("browser.download.manager.showWhenStarting", false);
+        ffOptions.addPreference("pdfjs.disabled", true);
 
-        DesiredCapabilities cap = DesiredCapabilities.firefox();
-        cap.setCapability(FirefoxDriver.PROFILE, ffProfile);
         // Create Firefox browser based on the profile just created.
-        FirefoxDriver ffDriver = new FirefoxDriver(cap);
+        FirefoxDriver ffDriver = new FirefoxDriver(ffOptions);
+
 
         // For tomcat 9.0.zip.
         ffDriver.get("https://www.selenium.dev/downloads/");
